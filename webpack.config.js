@@ -12,7 +12,7 @@ module.exports = {
                 presets: ['es2015', 'react']
             }
         }]
-    }
+    },
     output: {
         path: path.resolve(__dirname, 'public/javascripts/news/'),
         filename: 'newsOut.js'
