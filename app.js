@@ -5,10 +5,11 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const io = require('socket.io').listen(app)
 
 const index = require('./routes/index')
 const users = require('./routes/users')
-const news = require('./routes/router_news')
+const news = require('./routes/route_news')
 
 // error handler
 onerror(app)
