@@ -21,6 +21,9 @@ var port = normalizePort(process.env.PORT || '3000');
 
 var server = http.createServer(app.callback());
 
+//add socket io
+io = require('socket.io').listen(server)
+require('../modules/socketio/socketio')(io)
 /**
  * Listen on provided port, on all network interfaces.
  */
