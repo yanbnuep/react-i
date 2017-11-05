@@ -1,6 +1,5 @@
-function finshMessage(){
-	return 'finish'
-}
+const uploadNews = require('../database/db_uploadNews')
+
 module.exports = function(io) {
     io.on('connection', function(socket) {
         socket.on('disconnect', function() {
@@ -8,7 +7,10 @@ module.exports = function(io) {
         });
         socket.on('newsUpdate', function(news) {
             console.log(news);
-            finshMessage()
+            socket.emit('update finished',function(){
+            	
+            	
+            })
         })
     })
 }
