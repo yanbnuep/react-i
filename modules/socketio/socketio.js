@@ -6,7 +6,12 @@ module.exports = function(io) {
 
         });
         socket.on('newsUpdate', function(news) {
-            console.log(news);
+
+        	console.log(news.article);
+           	console.log(news.title);
+           	uploadNews(news)
+
+           	//todo upload finish notice to user
             socket.emit('update finished',function(){
             	
             	
