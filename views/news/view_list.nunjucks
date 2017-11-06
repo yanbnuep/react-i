@@ -1,0 +1,12 @@
+{% extends './view_layout.nunjucks' %}
+
+{% block content %}
+
+<ul>
+{% for item in news %}
+  <li>{{ item.title }}</li>
+{% else %}
+  <li> You reach the end </li>
+{% endfor %}
+</ul>
+{% endblock %}
