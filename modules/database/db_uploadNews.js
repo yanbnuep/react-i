@@ -15,12 +15,12 @@ var uploadNews = function (news) {
 				.set("Title",news.title)
 				.set("article",news.article)
 				.toString()
-	newsDB.query(sql,function(err,rows){
+	db.query(sql,function(err,rows){
 		if(err)
 			throw err
 		return rows
 	})
-	newsDB.end()
+	db.end()
 }
 
 
