@@ -2,7 +2,8 @@
 
 {% block content %}
 
-
-
+<script>
+window.news_list = {{list}}
+</script>
 
 {% endblock %}
