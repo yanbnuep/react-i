@@ -15,7 +15,8 @@
                 <label for="title">Title: </label>
                 <input id="title" type="text">
                 <label for="cover"></label>
-                <input type="file" id="cover">
+                <input type="file" id="cover" name="imgCover[]">
+                <output id="coverInfo"></output>
             </div>
         </fieldset>
     </form>
@@ -31,11 +32,23 @@
     var E = window.wangEditor
     var editor = new E('#editor')
     editor.create()
+    var imgIpt = document.getElementById('cover');
 
 })()
-var handleSubmit = function(){
-    var 
+function coverSelect(evt) {
+     if (window.File && window.FileReader && window.FileList && window.Blob) {
+
+            var cover = evt.target.files,
+    file,result = '';
+
+     }else {
+        alert('The File APIs are not fully supported in this browser.');
+     }
+
+
 }
+
+//http://www.codeforest.net/html5-image-upload-resize-and-crop
 </script>
 
 </html>
