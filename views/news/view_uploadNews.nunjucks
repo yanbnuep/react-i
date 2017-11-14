@@ -15,8 +15,9 @@
             <div class="pure-control-group">
                 <label for="title">Title: </label>
                 <input id="title" type="text">
+                <label for="cover"></label>
+                <input type="file" id="cover">
             </div>
-
         </fieldset>
     </form>
     <div id="toolbar"></div>
@@ -24,50 +25,11 @@
     <button id="submit">Submit</button>
     {% endblock %}
 </body>
-<!-- <script src="/javascripts/news/newsOut.js"></script> -->
-<!-- Include the Quill library -->
-<script src="https://cdn.quilljs.com/1.3.3/quill.js"></script>
-<script src="/javascripts/lib/socket.io.js"></script>
-<script>
-(function() {
-    var quill = new Quill('#editor', {
-        toolbar: {
-            container: '#toolbar', // Selector for toolbar container
-        },
-        modules: {
-            toolbar: [
-                [{ header: [1, 2, false] }],
-                ['bold', 'italic', 'underline'],
-                ['image', 'code-block'],
-                [{ 'direction': 'rtl' }],
-                [{ 'align': [] }],
-                [{ list: 'ordered' }, { list: 'bullet' }]
-            ]
-        },
-        theme: 'snow'
-    });
-    var socket = io();
-    var subbtn = document.getElementById('submit');
-    subbtn.addEventListener('click', function() {
-        submit(quill, socket)
-    })
-    socket.on('updateCompleted', function(data) {
-        alert(data);
-    })
-})();
-
-function submit(quill, socket) {
-    var delta = JSON.stringify(quill.getContents());
-    var title = document.getElementById('title').value;
-    if (!delta) { return false }
-    socket.emit('newsUpdate', {'article':delta,'title':title}, function(mes) {
-        alert(mes)
-    })
-
-    return false;
-}
-
-
+<script type="text/javascript" src="/javascripts/lib/wangEditor.min.js"></script>
+<script type="text/javascript">
+var E = window.wangEditor
+var editor = new E('#editor')
+editor.create()
 </script>
 
 </html>

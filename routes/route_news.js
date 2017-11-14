@@ -5,15 +5,15 @@ router.prefix('/uploadNews')
 
 
 
-router.get('/',async(ctx,next) => {
-	await ctx.render('./news/view_newsList')
+router.get('/', async(ctx, next) => {
+    await ctx.render('./news/view_uploadNews', {
+        title: 'first router'
+    })
 })
 
 
-router.get('/newsUpload',async (ctx,next) =>{
-	await ctx.render('./news/view_uploadNews',{
-		title: 'first router'
-	})
+router.get('/newsUpload', async(ctx, next) => {
+
 })
 
 module.exports = router
