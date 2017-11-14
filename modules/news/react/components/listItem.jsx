@@ -17,7 +17,7 @@ class Cover extends Component {
 	render () {
 		return (
 				<div className="coverContain">
-					<img src={this.props.coverSource} className="coverImg"/>
+					<img src={this.props.coverSource} className="coverImg" onClick={this.props.handleClick}/>
 				</div>
 			)
 	}
