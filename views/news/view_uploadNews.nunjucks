@@ -16,7 +16,10 @@
                 <input id="title" type="text">
                 <label for="cover"></label>
                 <input type="file" id="cover" name="imgCover[]">
-                <output id="coverInfo"></output>
+                <output id="coverInfo" style="width: 200px ;height: 100px;display: block;">
+                    <img src="" alt="" id="coverImg" style="width: 100%">
+                    <span id="uploadProgress"></span>
+                </output>
             </div>
         </fieldset>
     </form>
@@ -26,29 +29,64 @@
     {% endblock %}
 </body>
 <script type="text/javascript" src="/javascripts/lib/wangEditor.min.js"></script>
-<script type="text/javascript" src="/javascripts/lib/socket.io.js"></script>
+<script type="text/javascript" src="/javascripts/lib/jquery-1.12.min.js"></script>
 <script type="text/javascript">
-(function() {
-    var E = window.wangEditor
-    var editor = new E('#editor')
-    editor.create()
-    var imgIpt = document.getElementById('cover');
+$(document).ready(function() {
+    $('#cover').on('change',function(event){
+        handleCoverImg(event)
+    })
 
-})()
-function coverSelect(evt) {
-     if (window.File && window.FileReader && window.FileList && window.Blob) {
+})
 
-            var cover = evt.target.files,
-    file,result = '';
-
-     }else {
-        alert('The File APIs are not fully supported in this browser.');
-     }
-
-
+function handleCoverImg(evt) {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        var files = evt.target.files;
+        if(files.length){
+            var file = files[files.length - 1];
+        }
+        if(file.type.match('image.*')){
+            console.log(file)
+        }
+    }
 }
 
-//http://www.codeforest.net/html5-image-upload-resize-and-crop
+function uploadImg(img) {
+    $.ajax({
+        url: '/uploadImg',
+        type: 'POST',
+        data: img,
+        processData: false,
+        contentType: false,
+        success: function(data) {
+            console.log('upload complete' + data)
+        },
+        xhr: function() {
+            // create an XMLHttpRequest
+            var xhr = new XMLHttpRequest();
+
+            // listen to the 'progress' event
+            xhr.upload.addEventListener('progress', function(evt) {
+
+                if (evt.lengthComputable) {
+                    // calculate the percentage of upload completed
+                    var percentComplete = evt.loaded / evt.total;
+                    percentComplete = parseInt(percentComplete * 100);
+
+                    // update the Bootstrap progress bar with the new percentage
+                    $('#uploadProgress').text(percentComplete + '%');
+                    // once the upload reaches 100%, set the progress bar text to done
+                    if (percentComplete === 100) {
+                        $('#uploadProgress').html('Done');
+                    }
+
+                }
+
+            }, false);
+
+            return xhr;
+        }
+    })
+}
 </script>
 
 </html>
